@@ -8,15 +8,16 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <p>Using mustaches: {{ rawHtml }}</p>
-  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+  <div :id="dynamicId"></div>
+  <button :disabled="isButtonDisabled">Button</button>
 </div>
 
 <script>
   vm = new Vue({
     el: '#app',
     data: {
-      rawHtml: '<span style="color: red">This should be red.</span>',
+      dynamicId: 'foooooooo',
+      isButtonDisabled: 'true',
     }
   })
 </script>
