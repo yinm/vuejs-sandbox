@@ -7,23 +7,16 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="example"></div>
-
 <script>
-  let data = { a: 1 }
-  const vm = new Vue({
-    el: '#example',
-    data: data,
+  new Vue({
+    data: {
+      a: 1,
+    },
+    created: function() {
+      // 'this' keyword means the vm instance
+      console.log(`a is: ${this.a}`)
+    }
   })
-
-  console.log(vm.$data === data)
-  console.log(vm.$el === document.getElementById('example'))
-
-  vm.$watch('a', (newValue, oldValue) => {
-    console.log(`value changed from ${oldValue} to ${newValue}`)
-  })
-
-  vm.a = '100'
 </script>
 </body>
 </html>
