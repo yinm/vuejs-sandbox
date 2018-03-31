@@ -7,14 +7,16 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
+<div id="app">
+  <p>Using mustaches: {{ rawHtml }}</p>
+  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+</div>
+
 <script>
-  new Vue({
+  vm = new Vue({
+    el: '#app',
     data: {
-      a: 1,
-    },
-    created: function() {
-      // 'this' keyword means the vm instance
-      console.log(`a is: ${this.a}`)
+      rawHtml: '<span style="color: red">This should be red.</span>',
     }
   })
 </script>
