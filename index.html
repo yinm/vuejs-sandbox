@@ -7,20 +7,11 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<script>
-  let data = { a: 1 }
+<div id="app">
+  <p>{{ foo }}</p>
+  <button v-on:click="foo = 'baz'">Change it</button>
+</div>
 
-  const vm = new Vue({
-    data: data
-  })
-
-  console.log(vm.a === data.a)
-
-  vm.a = 2
-  console.log(data.a)
-
-  data.a = 3
-  console.log(vm.a)
-</script>
+<script src="script.js"></script>
 </body>
 </html>
