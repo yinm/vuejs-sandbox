@@ -7,11 +7,23 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="app">
-  <p>{{ foo }}</p>
-  <button v-on:click="foo = 'baz'">Change it</button>
-</div>
+<div id="example"></div>
 
-<script src="script.js"></script>
+<script>
+  let data = { a: 1 }
+  const vm = new Vue({
+    el: '#example',
+    data: data,
+  })
+
+  console.log(vm.$data === data)
+  console.log(vm.$el === document.getElementById('example'))
+
+  vm.$watch('a', (newValue, oldValue) => {
+    console.log(`value changed from ${oldValue} to ${newValue}`)
+  })
+
+  vm.a = '100'
+</script>
 </body>
 </html>
