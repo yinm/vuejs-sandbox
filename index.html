@@ -7,50 +7,17 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="watch-example">
-  <p>
-    Ask a yes/no question:
-    <input v-model="question">
-  </p>
-  <p>{{ answer }}</p>
+<div id="app">
+  <div class="static" :class="{ active: isActive, 'text-danger': hasError }"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 <script>
-  const watchExampleVM = new Vue({
-    el: '#watch-example',
+  const vm = new Vue({
+    el: '#app',
     data: {
-      question: '',
-      answer: 'I cannot give you an answer until you ask a question!'
+      isActive: true,
+      hasError: false,
     },
-    watch: {
-      question: function(newQuestion, oldQuestion) {
-        this.answer = 'Waiting for you to stop typing...'
-        this.getAnswer()
-      }
-    },
-    methods: {
-      getAnswer: _.debounce(
-        function() {
-          if (this.question.indexOf('?') === -1) {
-            this.answer = 'Questions usually contain a question mark. ;-)'
-            return
-          }
-
-          this.answer = 'Thinking...'
-          const vm = this
-          axios.get('https://yesno.wtf/api')
-            .then((response) => {
-              vm.answer = _.capitalize(response.data.answer)
-            })
-            .catch((error) => {
-              vm.answer = `Error! Could not reach the API. ${error}`
-            })
-        },
-        500
-      )
-    }
   })
 </script>
 </body>
