@@ -8,7 +8,7 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <ul id="app">
-  <li v-for="n in evenNumbers">{{ n }}</li>
+  <li v-for="n in even(numbers)">{{ n }}</li>
 </ul>
 
 <script>
@@ -17,9 +17,9 @@
     data: {
       numbers: [ 1, 2, 3, 4, 5 ],
     },
-    computed: {
-      evenNumbers: function() {
-        return this.numbers.filter((number) => {
+    methods: {
+      even: function(nums) {
+        return nums.filter((number) => {
           return number % 2 === 0
         })
       }
