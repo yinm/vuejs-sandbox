@@ -8,10 +8,10 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <select v-model="selected" multiple>
-    <option>A</option>
-    <option>B</option>
-    <option>C</option>
+  <select v-model="selected">
+    <option v-for="option in options" :value="option.value">
+      {{ option.text }}
+    </option>
   </select>
   <br>
   <span>Selected: {{ selected }}</span>
@@ -21,7 +21,12 @@
   const vm = new Vue({
     el: '#app',
     data: {
-      selected: [],
+      selected: 'A',
+      options: [
+        { text: 'One', value: 'A' },
+        { text: 'Two', value: 'B' },
+        { text: 'Three', value: 'C' },
+      ],
     },
   })
 </script>
