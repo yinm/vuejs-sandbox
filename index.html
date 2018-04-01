@@ -7,23 +7,13 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<ul id="app">
-  <li v-for="n in even(numbers)">{{ n }}</li>
-</ul>
+<div id="app">
+  <span v-for="n in 10">{{ `${n}, ` }}</span>
+</div>
 
 <script>
   const vm = new Vue({
     el: '#app',
-    data: {
-      numbers: [ 1, 2, 3, 4, 5 ],
-    },
-    methods: {
-      even: function(nums) {
-        return nums.filter((number) => {
-          return number % 2 === 0
-        })
-      }
-    }
   })
 </script>
 </body>
