@@ -7,27 +7,21 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="example-2">
-  <button @click="greet">Greet</button>
+<div id="example-3">
+  <button @click="say('hi')">Say hi</button>
+  <button @click="say('what')">Say What</button>
 </div>
-
 <script>
-  const example2 = new Vue({
-    el: '#example-2',
-    data: {
-      name: 'Vue.js',
-    },
+  const example3 = new Vue({
+    el: '#example-3',
     methods: {
-      greet: function(event) {
-        alert(`Hello ${this.name}!`)
-        if (event) {
-          alert(event.target.tagName)
-        }
+      say: function(message) {
+        alert(message)
       }
     }
   })
 
-  example2.greet()
+  example3.say('hoi')
 </script>
 </body>
 </html>
