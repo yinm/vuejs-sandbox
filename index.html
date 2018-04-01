@@ -8,26 +8,23 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <ul id="app">
-  <li v-for="(item, index) in items">
-    {{ index }}: {{ item }}
+  <li v-for="(value, key) in object">
+    {{ key}}: {{ value }}
   </li>
 </ul>
-
 <script>
   const vm = new Vue({
     el: '#app',
     data: {
-      items: [
-        'a',
-        'b',
-        'c',
-      ],
+      object: {
+        a: 'A',
+        b: 'B',
+        c: 'C',
+      },
     },
   })
-  Vue.set(vm.items, 1, 'x')
-  vm.items.splice(0, 1, 'y')
 
-  vm.items.splice(2)
+  vm.d = 'D'
 </script>
 </body>
 </html>
