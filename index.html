@@ -8,21 +8,20 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-  <label for="jack">Jack</label>
-  <input type="checkbox" id="john" value="John" v-model="checkedNames">
-  <label for="john">John</label>
-  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-  <label for="mike">Mike</label>
+  <input type="radio" id="one" value="One" v-model="picked">
+  <label for="one">One</label>
   <br>
-  <span>Checked names: {{ checkedNames }}</span>
+  <input type="radio" id="two" value="Two" v-model="picked">
+  <label for="two">Two</label>
+  <br>
+  <span>Picked: {{ picked }}</span>
 </div>
 
 <script>
   const vm = new Vue({
     el: '#app',
     data: {
-      checkedNames: [],
+      picked: '',
     },
   })
 </script>
