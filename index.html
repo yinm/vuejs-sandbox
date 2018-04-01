@@ -22,8 +22,15 @@
     },
   })
 
-  Vue.set(vm.userProfile, 'age', 27)
-  vm.$set(vm.userProfile, 'sex', 'male')
+  // Object.assign(vm.userProfile, {
+  //   age: 27,
+  //   favoriteColor: 'Vue Green',
+  // })
+
+  vm.userProfile = Object.assign({}, vm.userProfile, {
+    age: 27,
+    favoriteColor: 'Vue Green',
+  })
 </script>
 </body>
 </html>
