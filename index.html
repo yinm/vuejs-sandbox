@@ -8,16 +8,22 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <div :id="dynamicId"></div>
-  <button :disabled="isButtonDisabled">Button</button>
+  <p v-if="seen">Now you see me</p>
+  <a :href="url">リンクだよ</a>
+  <a v-on:click="doSomething">押したの？</a>
 </div>
 
 <script>
   vm = new Vue({
     el: '#app',
     data: {
-      dynamicId: 'foooooooo',
-      isButtonDisabled: 'true',
+      seen: true,
+      url: 'example.com',
+    },
+    methods: {
+      doSomething() {
+        console.log('押したよ')
+      }
     }
   })
 </script>
