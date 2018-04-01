@@ -7,16 +7,17 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<ul id="example-1">
-  <li v-for="item in items">
-    {{ item.message }}
+<ul id="example-2">
+  <li v-for="(item, index) in items">
+    {{ parentMessage }} - {{ index }} - {{ item.message }}
   </li>
 </ul>
 
 <script>
-  const example1 = new Vue({
-    el: '#example-1',
+  const example2 = new Vue({
+    el: '#example-2',
     data: {
+      parentMessage: 'Parent',
       items: [
         { message: 'Foo' },
         { message: 'Bar' },
