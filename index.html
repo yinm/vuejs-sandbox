@@ -8,8 +8,8 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <ul id="v-for-object">
-  <li v-for="(value, key) in object">
-    {{ key }}: {{ value }}
+  <li v-for="(value, key, index) in object">
+    {{ index }}. {{ key }}: {{ value }}
   </li>
 </ul>
 
