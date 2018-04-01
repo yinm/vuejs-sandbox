@@ -7,21 +7,17 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="example-3">
-  <button @click="warn('Form cannot be submitted yet.', $event)">
-    Submit
-  </button>
+<div id="app">
+  <input v-model="message" placeholder="edit me">
+  <p>Message is: {{ message }}</p>
 </div>
 
 <script>
-  const example3 = new Vue({
-    el: '#example-3',
-    methods: {
-      warn: function(message, event) {
-        if (event) event.preventDefault()
-        alert(message)
-      }
-    }
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      message: '',
+    },
   })
 </script>
 </body>
