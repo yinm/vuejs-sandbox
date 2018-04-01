@@ -8,8 +8,10 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <input v-model="message" placeholder="edit me">
-  <p>Message is: {{ message }}</p>
+  <span>Multiline message is:</span>
+  <p style="white-space: pre-line;">{{ message }}</p>
+  <br>
+  <textarea v-model="message" placeholder="add multiple lines"></textarea>
 </div>
 
 <script>
