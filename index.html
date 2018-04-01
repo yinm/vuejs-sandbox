@@ -7,27 +7,21 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="app">
-  <form @submit="onSubmit">
-    <input type="submit" :value="submitValue">
-  </form>
-
-  <a @click="doSomething">押したんやろ？</a>
+<div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
 </div>
 
 <script>
-  vm = new Vue({
-    el: '#app',
+  const vm = new Vue({
+    el: '#example',
     data: {
-      submitValue: 'ああああ、そーしんだああああ'
+      message: 'Hello'
     },
-    methods: {
-      onSubmit() {
-        console.log('送ったよ')
-      },
-      doSomething() {
-        console.log('押したんやで')
-      },
+    computed: {
+      reversedMessage: function() {
+        return this.message.split('').reverse().join('')
+      }
     },
   })
 </script>
