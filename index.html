@@ -8,16 +8,18 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <div class="static" :class="{ active: isActive, 'text-danger': hasError }"></div>
+  <div class="static" :class="classObject"></div>
 </div>
 
 <script>
   const vm = new Vue({
     el: '#app',
     data: {
-      isActive: true,
-      hasError: false,
-    },
+      classObject: {
+        active: true,
+        'text-danger': false,
+      }
+    }
   })
 </script>
 </body>
