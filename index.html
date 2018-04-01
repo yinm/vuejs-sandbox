@@ -7,17 +7,27 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="example-1">
-  <button @click="counter += 1">Add 1</button>
-  <p>The button above has been clicked {{ counter }} times.</p>
+<div id="example-2">
+  <button @click="greet">Greet</button>
 </div>
+
 <script>
-  const example1 = new Vue({
-    el: '#example-1',
+  const example2 = new Vue({
+    el: '#example-2',
     data: {
-      counter: 0,
+      name: 'Vue.js',
     },
+    methods: {
+      greet: function(event) {
+        alert(`Hello ${this.name}!`)
+        if (event) {
+          alert(event.target.tagName)
+        }
+      }
+    }
   })
+
+  example2.greet()
 </script>
 </body>
 </html>
