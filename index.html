@@ -8,17 +8,26 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <div v-if="Math.random() > 0.5">
-    Now you see me
+  <div v-if="type === 'A'">
+    A
+  </div>
+  <div v-else-if="type === 'B'">
+    B
+  </div>
+  <div v-else-if="type === 'C'">
+    C
   </div>
   <div v-else>
-    Now you don't
+    Not A/B/C
   </div>
 </div>
 
 <script>
-  vm = new Vue({
+  const vm = new Vue({
     el: '#app',
+    data: {
+      type: 'A'
+    },
   })
 </script>
 </body>
