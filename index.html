@@ -8,9 +8,11 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <form v-on:submit.prevent="onSubmit">
+  <form @submit="onSubmit">
     <input type="submit" :value="submitValue">
   </form>
+
+  <a @click="doSomething">押したんやろ？</a>
 </div>
 
 <script>
@@ -22,7 +24,10 @@
     methods: {
       onSubmit() {
         console.log('送ったよ')
-      }
+      },
+      doSomething() {
+        console.log('押したんやで')
+      },
     },
   })
 </script>
