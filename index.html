@@ -8,7 +8,9 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <child my-message="kebab-caseだよ！"></child>
+  <input v-model="parentMsg">
+  <br>
+  <child :my-message="parentMsg"></child>
 </div>
 
 <script>
@@ -17,8 +19,11 @@
     template: `<span>{{ myMessage }}</span>`,
   })
 
-  vm = new Vue({
+  const vm = new Vue({
     el: '#app',
+    data: {
+      parentMsg: 'Message from parent',
+    },
   })
 </script>
 </body>
