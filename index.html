@@ -7,23 +7,29 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<ul id="v-for-object">
-  <li v-for="(value, key, index) in object">
-    {{ index }}. {{ key }}: {{ value }}
+<ul id="app">
+  <li v-for="(item, index) in items">
+    {{ index }}: {{ item.message }}
   </li>
 </ul>
 
 <script>
   const vm = new Vue({
-    el: '#v-for-object',
+    el: '#app',
     data: {
-      object: {
-        firstName: 'John',
-        lastName: 'Doe',
-        age: 30,
-      },
+      items: [
+        'a',
+        'b',
+        'c',
+      ],
     },
   })
+
+  console.log(vm.items)
+
+  vm.items[1] = 'x'
+  vm.items.length = 2
+  console.log(vm.items)
 </script>
 </body>
 </html>
