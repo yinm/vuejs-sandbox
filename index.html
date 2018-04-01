@@ -12,12 +12,15 @@
 </div>
 
 <script>
-  Vue.component('my-component', {
-    template: '<div>A custom component!</div>',
-  })
+  const Child = {
+    template: '<div>A child custom component!</div>',
+  }
 
   new Vue({
     el: '#example',
+    components: {
+      'my-component': Child,
+    },
   })
 </script>
 </body>
