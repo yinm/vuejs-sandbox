@@ -9,7 +9,7 @@
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="example">
   <p>Original message: "{{ message }}"</p>
-  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage() }}"</p>
 </div>
 
 <script>
@@ -18,8 +18,8 @@
     data: {
       message: 'Hello'
     },
-    computed: {
-      reversedMessage: function() {
+    methods: {
+      reversedMessage() {
         return this.message.split('').reverse().join('')
       }
     },
