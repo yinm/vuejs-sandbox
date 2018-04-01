@@ -7,20 +7,23 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="example">
+<div id="app">
   <my-component></my-component>
 </div>
 
 <script>
-  const Child = {
-    template: '<div>A child custom component!</div>',
-  }
 
-  new Vue({
-    el: '#example',
-    components: {
-      'my-component': Child,
+  Vue.component('my-component', {
+    template: '<span>{{ message }}</span>',
+    data: function() {
+      return {
+        message: 'hello',
+      }
     },
+  })
+
+  const vm = new Vue({
+    el: '#app',
   })
 </script>
 </body>
