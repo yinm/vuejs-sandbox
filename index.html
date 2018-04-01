@@ -8,23 +8,15 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <div class="static" :class="classObject"></div>
+  <h1 v-if="ok">Yes</h1>
+  <h1 v-else>No</h1>
 </div>
 
 <script>
   const vm = new Vue({
     el: '#app',
     data: {
-      isActive: true,
-      error: null,
-    },
-    computed: {
-      classObject: function() {
-        return {
-          active: this.isActive && !this.error,
-          'text-danger': this.error && this.error.type === 'fatal',
-        }
-      },
+      ok: true,
     },
   })
 </script>
