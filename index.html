@@ -8,8 +8,10 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="example">
-  <p>Original message: "{{ message }}"</p>
-  <p>Computed reversed message: "{{ reversedMessage() }}"</p>
+  <p>computed-now {{ computedNow }}</p>
+  <p>method-now {{ methodNow() }}</p>
+
+  <button @click="onClick">押してみる？</button>
 </div>
 
 <script>
@@ -18,9 +20,21 @@
     data: {
       message: 'Hello'
     },
+    computed: {
+      computedNow: function() {
+        return Date.now()
+      }
+    },
     methods: {
       reversedMessage() {
         return this.message.split('').reverse().join('')
+      },
+      methodNow() {
+        return Date.now()
+      },
+      onClick() {
+        console.log(`computed-now: ${this.computedNow}`)
+        console.log(`method-now: ${this.methodNow()}`)
       }
     },
   })
