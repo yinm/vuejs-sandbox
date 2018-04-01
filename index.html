@@ -7,15 +7,15 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="app">
-  <h1 v-show="ok">Hello!</h1>
+<div id="example-1">
+  <button @click="counter += 1">Add 1</button>
+  <p>The button above has been clicked {{ counter }} times.</p>
 </div>
-
 <script>
-  const vm = new Vue({
-    el: '#app',
+  const example1 = new Vue({
+    el: '#example-1',
     data: {
-      ok: true
+      counter: 0,
     },
   })
 </script>
