@@ -8,7 +8,7 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <ul id="app">
-  <li v-for="(value, key) in object">
+  <li v-for="(value, key) in userProfile">
     {{ key}}: {{ value }}
   </li>
 </ul>
@@ -16,15 +16,14 @@
   const vm = new Vue({
     el: '#app',
     data: {
-      object: {
-        a: 'A',
-        b: 'B',
-        c: 'C',
+      userProfile: {
+        name: 'Anika',
       },
     },
   })
 
-  vm.d = 'D'
+  Vue.set(vm.userProfile, 'age', 27)
+  vm.$set(vm.userProfile, 'sex', 'male')
 </script>
 </body>
 </html>
