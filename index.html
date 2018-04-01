@@ -8,12 +8,12 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <select v-model="selected">
-    <option disabled value="">Please select one</option>
+  <select v-model="selected" multiple>
     <option>A</option>
     <option>B</option>
     <option>C</option>
   </select>
+  <br>
   <span>Selected: {{ selected }}</span>
 </div>
 
@@ -21,7 +21,7 @@
   const vm = new Vue({
     el: '#app',
     data: {
-      selected: '',
+      selected: [],
     },
   })
 </script>
