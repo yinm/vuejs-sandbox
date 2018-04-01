@@ -7,25 +7,19 @@
 </head>
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
-<div id="app">
-  <select v-model="selected">
-    <option v-for="option in options" :value="option.value">
-      {{ option.text }}
-    </option>
-  </select>
-  <br>
-  <span>Selected: {{ selected }}</span>
-</div>
+<ul id="example-1">
+  <li v-for="item in items">
+    {{ item.message }}
+  </li>
+</ul>
 
 <script>
-  const vm = new Vue({
-    el: '#app',
+  const example1 = new Vue({
+    el: '#example-1',
     data: {
-      selected: 'A',
-      options: [
-        { text: 'One', value: 'A' },
-        { text: 'Two', value: 'B' },
-        { text: 'Three', value: 'C' },
+      items: [
+        { message: 'Foo' },
+        { message: 'Bar' },
       ],
     },
   })
