@@ -8,20 +8,20 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <input type="radio" id="one" value="One" v-model="picked">
-  <label for="one">One</label>
-  <br>
-  <input type="radio" id="two" value="Two" v-model="picked">
-  <label for="two">Two</label>
-  <br>
-  <span>Picked: {{ picked }}</span>
+  <select v-model="selected">
+    <option disabled value="">Please select one</option>
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <span>Selected: {{ selected }}</span>
 </div>
 
 <script>
   const vm = new Vue({
     el: '#app',
     data: {
-      picked: '',
+      selected: '',
     },
   })
 </script>
