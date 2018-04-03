@@ -8,22 +8,21 @@
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
 <div id="app">
-  <div is="my-component"></div>
-  <div :is="currentComponent"></div>
+  <my-component></my-component>
 </div>
 
 <script>
-  const myComponent = { template: '<p>example</p>' }
-  const myComponent2 = { template: '<p>example2</p>' }
+  Vue.component('my-component', {
+    template: '<p>example {{ message }}</p>',
+    data: function() {
+      return {
+        message: 'hello',
+      }
+    }
+  })
 
   new Vue({
     el: '#app',
-    components: {
-      'my-component': myComponent,
-    },
-    data: {
-      'currentComponent': myComponent2,
-    }
   })
 </script>
 </body>
