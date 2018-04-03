@@ -4,92 +4,74 @@
   <meta charset="UTF-8">
   <title>Vue component study</title>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
   <style>
-    .flip-list-move {
-      transition: transform 1s;
-    }
-    .component-box {
-      margin: 5px;
-      padding: 5px;
+    #app, #sub1, #sub2 {
       border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
     }
-    .component-box h3 {
-      margin: 0;
-    }
-    .iine {
-      text-decoration: underline;
-      cursor: pointer;
-      color: #0093d1;
+    h2 {
+      margin: 4px 0 2px;
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
+<h2>#app</h2>
 <div id="app">
-  <friends-list inline-template>
-    <div>
-      <transition-group name="flip-list" tag="ul">
-        <friends-profile v-for="(friend, idx) in sortedFriends"
-                        v-bind="friend"
-                        :key="friend.id"
-                        @count-trigger="countUp(idx)"></friends-profile>
-      </transition-group>
-    </div>
-  </friends-list>
+  <button @click="increment('sub1')">sub1</button>
+  <button @click="increment('sub2')">sub2</button>
 </div>
-
-<script type="text/x-template" id="tpl-friends-profile">
-  <li>
-    name: <span :style="{color: color}">{{ name }}</span> [{{ count }}]
-    <span @click="$emit('count-trigger')" class="iine">いいね</span>
-  </li>
-</script>
+<h2>#sub1</h2>
+<div id="sub1"></div>
+<h2>#sub2</h2>
+<div id="sub2"></div>
 
 <script>
-  const friendsProfile = Vue.extend({
-    props: {
-      id: Number,
-      name: String,
-      color: String,
-      count: Number,
+  const store = new Vuex.Store({
+    state: {
+      count: 0,
     },
-    template: '#tpl-friends-profile',
+    mutations: {
+      increment(state) {
+        state.count++
+      },
+    },
   })
 
-  const friendsList = Vue.extend({
-    data: function() {
+  const ChildComp = Vue.extend({
+    data() {
       return {
-        friends: [
-          { id: 1, name: 'サーバル', color: '#e69313', count: 0 },
-          { id: 2, name: 'フェネック', color: '#a7a264', count: 0 },
-          { id: 3, name: 'アライグマ', color: '#bbbbbb', count: 0 },
-        ]
+        count: 0,
       }
     },
-    computed: {
-      sortedFriends: function() {
-        return this.friends.sort(function(a, b) {
-          if (a.count < b.count) return 1
-          if (a.count > b.count) return -1
-          return 0
-        })
-      }
-    },
-    components: {
-      'friends-profile': friendsProfile
-    },
-    methods: {
-      countUp: function(idx) {
-        this.friends[idx].count++
-      }
+    template: '<div :id="$el.id"> Store:{{ $store.state.count }} Local:{{ count }}</div>',
+    created() {
+      this.$on('increment', function() {
+        this.count++
+      })
     }
   })
 
-  new Vue({
+  const app = new Vue({
     el: '#app',
-    components: {
-      'friends-list': friendsList,
+    store: store,
+    data: {
+      sub1: null,
+      sub2: null,
     },
+    methods: {
+      increment(key) {
+        this[key].$emit('increment')
+        this.$store.commit('increment')
+      }
+    },
+    created() {
+      this.sub1 = new ChildComp({ el: '#sub1', parent: this })
+      this.sub2 = new ChildComp({ el: '#sub2', store: store })
+    }
   })
 </script>
 </body>
