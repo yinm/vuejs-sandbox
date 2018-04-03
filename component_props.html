@@ -8,15 +8,21 @@
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
 <div id="app">
-  <my-component class="p"></my-component>
+  <div is="my-component"></div>
+  <div :is="currentComponent"></div>
 </div>
 
 <script>
   const myComponent = { template: '<p>example</p>' }
+  const myComponent2 = { template: '<p>example2</p>' }
+
   new Vue({
     el: '#app',
     components: {
       'my-component': myComponent,
+    },
+    data: {
+      'currentComponent': myComponent2,
     }
   })
 </script>
