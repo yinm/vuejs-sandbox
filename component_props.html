@@ -8,26 +8,24 @@
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
 <div id="app">
-  <child-component val="message"></child-component>
+  <child-component @childs-event="parentMethod"></child-component>
 </div>
 
 <script>
   Vue.component('child-component', {
-    template: '<p>{{ val }}</p>',
-    props: {
-      val: String,
-    },
+    template: '<p>子供さん</p>',
     mounted() {
-      console.log(this.val)
-      this.val = ' 勝手に変更してやんよ'
+      this.$emit('childs-event', 'hello!')
     },
   })
 
   new Vue({
     el: '#app',
-    data: {
-      message: 'hello!',
-    }
+    methods: {
+      parentMethod: function(message) {
+        alert(message)
+      }
+    },
   })
 </script>
 </body>
