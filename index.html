@@ -8,23 +8,33 @@
 <body>
 <!-- ref: https://jp.vuejs.org/v2/guide/index.html -->
 <div id="app">
-  <child v-bind="todo"></child>
 </div>
 
 <script>
-  Vue.component('child', {
-    props: ['todo'],
-    template: `<span>{{ todo.text, todo.isComplete }}</span>`,
-  })
-
-  const vm = new Vue({
-    el: '#app',
-    data: {
-      todo: {
-        text: 'Learn Vue',
-        isComplete: false,
+  Vue.component('example', {
+    props: {
+      propA: Number,
+      propB: [String, Number],
+      propC: {
+        type: String,
+        required: true,
       },
-    },
+      propD: {
+        type: Number,
+        default: 100,
+      },
+      propE: {
+        type: Object,
+        default: function() {
+          return { message: 'hello' }
+        },
+      },
+      propF: {
+        validator: function(value) {
+          return value > 10
+        }
+      },
+    }
   })
 </script>
 </body>
