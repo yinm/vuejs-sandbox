@@ -8,14 +8,14 @@
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
 <div id="app">
-  <child-component @childs-event="parentMethod"></child-component>
+  <child-component @childs-event="parentMethod(parentsData)"></child-component>
 </div>
 
 <script>
   Vue.component('child-component', {
     template: '<p>子供さん</p>',
     mounted() {
-      this.$emit('childs-event', 'helloooooooo')
+      this.$emit('childs-event')
     },
   })
 
@@ -25,6 +25,9 @@
       parentMethod: function(message) {
         alert(message)
       }
+    },
+    data: {
+      'parentsData': 'foobar',
     },
   })
 </script>
