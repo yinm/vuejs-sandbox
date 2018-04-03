@@ -30,16 +30,17 @@
     <div>
       <transition-group name="flip-list" tag="ul">
         <friends-profile v-for="(friend, idx) in sortedFriends"
-                         v-bind="friend"
-                         :key="friend.id"
-                         @count-trigger="countUp(idx)"></friends-profile>
+                        v-bind="friend"
+                        :key="friend.id"
+                        @count-trigger="countUp(idx)"></friends-profile>
       </transition-group>
     </div>
   </friends-list>
 </div>
+
 <script type="text/x-template" id="tpl-friends-profile">
   <li>
-    name：<span :style="{color: color}">{{ name }}</span> [{{ count }}]
+    name: <span :style="{color: color}">{{ name }}</span> [{{ count }}]
     <span @click="$emit('count-trigger')" class="iine">いいね</span>
   </li>
 </script>
@@ -54,6 +55,7 @@
     },
     template: '#tpl-friends-profile',
   })
+
   const friendsList = Vue.extend({
     data: function() {
       return {
@@ -66,7 +68,7 @@
     },
     computed: {
       sortedFriends: function() {
-        return this.friends.sort(function (a, b) {
+        return this.friends.sort(function(a, b) {
           if (a.count < b.count) return 1
           if (a.count > b.count) return -1
           return 0
@@ -80,12 +82,13 @@
       countUp: function(idx) {
         this.friends[idx].count++
       }
-    },
+    }
   })
+
   new Vue({
     el: '#app',
     components: {
-      'friends-list': friendsList
+      'friends-list': friendsList,
     },
   })
 </script>
