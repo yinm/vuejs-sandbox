@@ -8,26 +8,47 @@
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
 <div id="app">
-  <child-component @childs-event="parentMethod(parentsData)"></child-component>
+  <div class="box">
+    <h3>ここは親のスコープ</h3>
+    <p>{{ childMessage }}</p>
+    <child-component
+      :parent-message="parentMessage"
+      @send-message="getChildMessage"></child-component>
+  </div>
 </div>
 
 <script>
-  Vue.component('child-component', {
-    template: '<p>子供さん</p>',
-    mounted() {
-      this.$emit('childs-event')
+  const childComp = Vue.extend({
+    props: { parentMessage: String },
+    template: `
+      <div class="box"><h3>ここは子のスコープ</h3>
+      <p>{{ parentMessage }}</p></div>
+    `,
+    data: function() {
+        return {
+          childMessage: 'これは子のデータだよ',
+        }
     },
+    created: function() {
+      this.$emit('send-message', this.childMessage)
+      this.childMessage = '子がデータを変更したよ'
+      this.$emit('send-message', this.childMessage)
+    }
   })
 
   new Vue({
     el: '#app',
-    methods: {
-      parentMethod: function(message) {
-        alert(message)
-      }
-    },
     data: {
-      'parentsData': 'foobar',
+      parentMessage: 'これは親のデータだよ',
+      childMessage: '',
+    },
+    components: {
+      'child-component': childComp,
+    },
+    methods: {
+      getChildMessage: function(text) {
+        this.childMessage = text
+      }
     },
   })
 </script>
