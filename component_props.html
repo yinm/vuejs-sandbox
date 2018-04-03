@@ -8,21 +8,21 @@
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
 <div id="app">
-  <my-component></my-component>
+  <child-component val="message"></child-component>
+  <child-component :val="message"></child-component>
 </div>
 
 <script>
-  Vue.component('my-component', {
-    template: '<p>example {{ message }}</p>',
-    data: function() {
-      return {
-        message: 'hello',
-      }
-    }
+  Vue.component('child-component', {
+    template: '<p>{{ val }}</p>',
+    props: ['val'],
   })
 
   new Vue({
     el: '#app',
+    data: {
+      message: 'hello!',
+    }
   })
 </script>
 </body>
