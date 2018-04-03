@@ -20,20 +20,17 @@
 <script>
   const childComp = Vue.extend({
     props: { parentMessage: String },
-    template: `
-      <div class="box"><h3>ここは子のスコープ</h3>
-      <p>{{ parentMessage }}</p></div>
-    `,
+    template: '<div class="box"><h3>ここは子のスコープ</h3>' +
+      '<p>{{ parentMessage }}</p></div>',
     data: function() {
         return {
           childMessage: 'これは子のデータだよ',
         }
     },
-    created: function() {
-      this.$emit('send-message', this.childMessage)
+    created() {
+        this.$emit('send-message', this.childMessage)
       this.childMessage = '子がデータを変更したよ'
-      this.$emit('send-message', this.childMessage)
-    }
+    },
   })
 
   new Vue({
@@ -48,7 +45,7 @@
     methods: {
       getChildMessage: function(text) {
         this.childMessage = text
-      }
+      },
     },
   })
 </script>
