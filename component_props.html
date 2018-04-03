@@ -4,48 +4,88 @@
   <meta charset="UTF-8">
   <title>Vue component study</title>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .flip-list-move {
+      transition: transform 1s;
+    }
+    .component-box {
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+    .component-box h3 {
+      margin: 0;
+    }
+    .iine {
+      text-decoration: underline;
+      cursor: pointer;
+      color: #0093d1;
+    }
+  </style>
 </head>
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
 <div id="app">
-  <div class="box">
-    <h3>ここは親のスコープ</h3>
-    <p>{{ childMessage }}</p>
-    <child-component
-      :parent-message="parentMessage"
-      @send-message="getChildMessage"></child-component>
-  </div>
+  <friends-list inline-template>
+    <div>
+      <transition-group name="flip-list" tag="ul">
+        <friends-profile v-for="(friend, idx) in sortedFriends"
+                         v-bind="friend"
+                         :key="friend.id"
+                         @count-trigger="countUp(idx)"></friends-profile>
+      </transition-group>
+    </div>
+  </friends-list>
 </div>
+<script type="text/x-template" id="tpl-friends-profile">
+  <li>
+    name：<span :style="{color: color}">{{ name }}</span> [{{ count }}]
+    <span @click="$emit('count-trigger')" class="iine">いいね</span>
+  </li>
+</script>
 
 <script>
-  const childComp = Vue.extend({
-    props: { parentMessage: String },
-    template: '<div class="box"><h3>ここは子のスコープ</h3>' +
-      '<p>{{ parentMessage }}</p></div>',
-    data: function() {
-        return {
-          childMessage: 'これは子のデータだよ',
-        }
+  const friendsProfile = Vue.extend({
+    props: {
+      id: Number,
+      name: String,
+      color: String,
+      count: Number,
     },
-    created() {
-        this.$emit('send-message', this.childMessage)
-      this.childMessage = '子がデータを変更したよ'
-    },
+    template: '#tpl-friends-profile',
   })
-
-  new Vue({
-    el: '#app',
-    data: {
-      parentMessage: 'これは親のデータだよ',
-      childMessage: '',
+  const friendsList = Vue.extend({
+    data: function() {
+      return {
+        friends: [
+          { id: 1, name: 'サーバル', color: '#e69313', count: 0 },
+          { id: 2, name: 'フェネック', color: '#a7a264', count: 0 },
+          { id: 3, name: 'アライグマ', color: '#bbbbbb', count: 0 },
+        ]
+      }
+    },
+    computed: {
+      sortedFriends: function() {
+        return this.friends.sort(function (a, b) {
+          if (a.count < b.count) return 1
+          if (a.count > b.count) return -1
+          return 0
+        })
+      }
     },
     components: {
-      'child-component': childComp,
+      'friends-profile': friendsProfile
     },
     methods: {
-      getChildMessage: function(text) {
-        this.childMessage = text
-      },
+      countUp: function(idx) {
+        this.friends[idx].count++
+      }
+    },
+  })
+  new Vue({
+    el: '#app',
+    components: {
+      'friends-list': friendsList
     },
   })
 </script>
