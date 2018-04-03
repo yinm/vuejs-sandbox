@@ -9,13 +9,18 @@
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
 <div id="app">
   <child-component val="message"></child-component>
-  <child-component :val="message"></child-component>
 </div>
 
 <script>
   Vue.component('child-component', {
     template: '<p>{{ val }}</p>',
-    props: ['val'],
+    props: {
+      val: String,
+    },
+    mounted() {
+      console.log(this.val)
+      this.val = ' 勝手に変更してやんよ'
+    },
   })
 
   new Vue({
