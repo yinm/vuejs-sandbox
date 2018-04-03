@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue component study</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
+<div id="app">
+  <my-component class="p"></my-component>
+</div>
+
+<script>
+  const myComponent = { template: '<p>example</p>' }
+  new Vue({
+    el: '#app',
+    components: {
+      'my-component': myComponent,
+    }
+  })
+</script>
+</body>
+</html>
