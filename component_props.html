@@ -117,63 +117,44 @@
     }
   </style>
   <style>
+
   </style>
 </head>
 <body>
 <!-- ref: http://chibinowa.net/note/vuejs/vue-4.html -->
-<h2>#app</h2>
-<div id="app">
-  <button @click="increment('sub1')">sub1</button>
-  <button @click="increment('sub2')">sub2</button>
-</div>
-<h2>#sub1</h2>
-<div id="sub1"></div>
-<h2>#sub2</h2>
-<div id="sub2"></div>
+<section id="area4" class="area">
+  <div id="app">
+    切り替える: <select v-model="current">
+    <option value="a">a</option>
+    <option value="b">b</option>
+  </select>
+    <child-comp v-if="current=='a'" key="a">A</child-comp>
+    <child-comp v-if="current=='b'" key="b">B</child-comp>
+  </div>
+
+  <script type="text/x-template" id="template-child">
+    <div>
+      <h2>Component: {{ $slots.default[0].text }}</h2>
+      Count: {{ count }} <button @click="count++">click</button>
+    </div>
+</script>
+</section>
 
 <script>
-  const store = new Vuex.Store({
-    state: {
-      count: 0,
-    },
-    mutations: {
-      increment(state) {
-        state.count++
-      },
-    },
-  })
-
-  const ChildComp = Vue.extend({
+  Vue.component('child-comp', {
+    template: '#template-child',
     data() {
       return {
-        count: 0
+        count: 0,
       }
     },
-    template: '<div :id="$el.id"> Store:{{ $store.state.count }} Local:{{ count }}</div>',
-    created() {
-      this.$on('increment', () => {
-        this.count++
-      })
-    }
   })
 
-  const app = new Vue({
+  new Vue({
     el: '#app',
-    store: store,
     data: {
-      sub1: null,
-      sub2: null,
+      current: 'a',
     },
-    methods: {
-      increment(key) {
-        this[key].$emit('increment')
-        this.$store.commit('increment')
-      }
-    },
-    created() {
-      this.sub1 = new ChildComp({ el: '#sub1', parent: this })
-      this.sub2 = new ChildComp({ el: '#sub2', store: store })
-    }
   })
 </script>
 
