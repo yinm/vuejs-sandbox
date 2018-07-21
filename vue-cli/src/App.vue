@@ -3,6 +3,7 @@
     <p>
       {{msg}}
     </p>
+    <input type="text" v-model="msg">
   </div>
 </template>
 
@@ -10,7 +11,7 @@
   export default {
     data() {
       return {
-        msg: 'Hello World!'
+        msg: 'Hello World'
       }
     }
   }
