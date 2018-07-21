@@ -14,9 +14,18 @@ server.get('*', (req, res) => {
     template: require('fs').readFileSync('./index.template.html', 'utf-8')
   })
 
-  renderer.renderToString(app, (err, html) => {
+  const context = {
+    title: 'hello',
+    meta: `
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta name="description" content="Vue SSR">
+    `
+  }
+
+  renderer.renderToString(app, context, (err, html) => {
     if (err) {
       res.status(500).end('Internal Server Error')
+      console.log(err)
       return
     }
     console.log(html)
