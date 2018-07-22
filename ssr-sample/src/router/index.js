@@ -3,8 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-import Counter from '../views/Counter'
-import Weather from '../views/Weather'
+import Counter from '../views/Counter.vue'
+import Weather from '../views/Weather.vue'
 
 export default new Router({
   mode: 'history',
