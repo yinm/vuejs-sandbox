@@ -7,6 +7,13 @@ export default context => {
   if (!matchedComponents.length) {
     return Promise.reject({ code: '404' })
   }
-  context.initialState = store.state
-  return app
+
+  return Promise.all(matchedComponents.map(component => {
+    if (component.preFetch) {
+      return component.preFetch(store)
+    }
+  })).then(() => {
+    context.installState = store.state
+    return app
+  })
 }
