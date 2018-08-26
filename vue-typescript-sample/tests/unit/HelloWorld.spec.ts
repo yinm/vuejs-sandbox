@@ -111,4 +111,31 @@ describe('HelloVue.vue', () => {
     })
   })
 
+  describe('methodのテスト', () => {
+    beforeEach(() => {
+      wrapper = shallowMount(HelloVue)
+    })
+
+    it('handleInputメソッドのテスト', () => {
+      const event = {
+        target: { value: 'AAA' },
+      }
+
+      wrapper.vm.handleInput(event)
+
+      expect(wrapper.vm.inputValue).toBe('AAA')
+    })
+
+    it('handleClickメソッドのテスト', () => {
+      wrapper.setData({ inputValue: 'AAA' })
+      const spy = jest.spyOn(wrapper.vm, '$emit')
+
+      wrapper.vm.handleClick()
+
+      expect(wrapper.vm.value).toBe('AAA')
+      expect(wrapper.vm.inputValue).toBe('')
+      expect(spy).toHaveBeenCalledWith('handle-click', 'AAA')
+    })
+  })
+
 })
