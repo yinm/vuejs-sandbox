@@ -91,4 +91,24 @@ describe('HelloVue.vue', () => {
     })
   })
 
+  describe('computedのテスト', () => {
+    beforeEach(() => {
+      wrapper = shallowMount(HelloVue)
+    })
+
+    it('isDisabledがtrueを返すかテスト', () => {
+      wrapper.setData({ inputValue: '' })
+      const disabled = wrapper.vm.isDisabled
+
+      expect(disabled).toBeTruthy()
+    })
+
+    it('isDisabledがfalseを返すかテスト', () => {
+      wrapper.setData({ inputValue: 'AAA' })
+      const disabled = wrapper.vm.isDisabled
+
+      expect(disabled).toBeFalsy()
+    })
+  })
+
 })
