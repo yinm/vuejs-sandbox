@@ -1,3 +1,6 @@
+ref: [TypeScriptでVue.jsを書く – Vue CLIを使った開発のポイントを紹介 | maesblog](https://mae.chab.in/archives/60167)
+
+
 # vue-typescript-sample
 
 ## Project setup
