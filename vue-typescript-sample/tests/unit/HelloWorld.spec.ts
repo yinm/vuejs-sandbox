@@ -31,4 +31,36 @@ describe('HelloVue.vue', () => {
     expect(button.element.getAttribute('disabled')).toBeTruthy()
   })
 
+  describe('イベントのテスト', () => {
+    beforeEach(() => {
+      wrapper = shallowMount(HelloVue)
+    })
+
+    it('テキスト入力時にhandleInputが呼ばれるかテスト', () => {
+      const spy = jest.spyOn(wrapper.vm, 'handleInput')
+
+      wrapper.find('input').trigger('input')
+
+      expect(spy).toHaveBeenCalled()
+    })
+
+    it('ボタン押下時にhandleClickが呼ばれるかテスト', () => {
+      const spy = jest.spyOn(wrapper.vm, 'handleClick')
+      wrapper.setData({ inputValue: 'AAA' })
+
+      wrapper.find('button').trigger('click')
+
+      expect(spy).toHaveBeenCalled()
+    })
+
+    it(' 入力なしの状態でhandleClickが呼ばれないかテスト', () => {
+      const spy = jest.spyOn(wrapper.vm, 'handleClick')
+      wrapper.setData({ inputValue: '' })
+
+      wrapper.find('button').trigger('click')
+
+      expect(spy).not.toHaveBeenCalled()
+    })
+  })
+
 })
