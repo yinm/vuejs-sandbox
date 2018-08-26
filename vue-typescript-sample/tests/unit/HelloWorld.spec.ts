@@ -150,4 +150,12 @@ describe('HelloVue.vue', () => {
       expect(received).toBe('Hello BBB')
     })
   })
+
+  describe('スナップショットテスト', () => {
+    it('HelloVueテンプレートのスナップショット', () => {
+      wrapper = shallowMount(HelloVue)
+
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+  })
 })
