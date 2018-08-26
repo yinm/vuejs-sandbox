@@ -79,4 +79,16 @@ describe('HelloVue.vue', () => {
     })
   })
 
+  describe('Lifecycle Hookのテスト', () => {
+    it('マウント時にmountedが機能するかテスト', () => {
+      const spy = jest.spyOn(console, 'log')
+
+      shallowMount(HelloVue)
+
+      expect(spy).toHaveBeenCalled()
+
+      spy.mockClear()
+    })
+  })
+
 })
