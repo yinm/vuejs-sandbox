@@ -138,4 +138,16 @@ describe('HelloVue.vue', () => {
     })
   })
 
+  describe('filtersのテスト', () => {
+    it('アッパーケースに変換されるかテスト', () => {
+      wrapper = shallowMount(HelloVue, {
+        propsData: { val: '' },
+      })
+      wrapper.setData({ value: 'Bbb' })
+
+      const received = wrapper.find('h1').text()
+
+      expect(received).toBe('Hello BBB')
+    })
+  })
 })
