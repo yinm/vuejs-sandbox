@@ -63,4 +63,20 @@ describe('HelloVue.vue', () => {
     })
   })
 
+  describe('watcherのテスト', () => {
+    it('valueの値が変更された時にwatchが機能するかテスト', () => {
+      wrapper = shallowMount(HelloVue, {
+        propsData: { val: 'AAA' },
+      })
+      const spy = jest.spyOn(console, 'log')
+
+      wrapper.setData({ value: 'BBB' })
+
+      expect(wrapper.vm.value).toBe('BBB')
+      expect(spy).toHaveBeenCalledWith('watch: BBB, AAA')
+
+      spy.mockClear()
+    })
+  })
+
 })
