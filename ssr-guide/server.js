@@ -1,34 +1,18 @@
-const Vue = require('vue')
+const createApp = require('./app')
 const server = require('express')()
-const createRenderer = require('vue-server-renderer').createRenderer
+const renderer = require('vue-server-renderer').createRenderer()
 
 server.get('*', (req, res) => {
-  const app = new Vue({
-    data: {
-      url: req.url,
-    },
-    template: `<div>The visited URL is: {{ url }}</div>`,
-  })
+  const context = { url: req.url }
+  const app = createApp(context)
 
-  const renderer = createRenderer({
-    template: require('fs').readFileSync('./index.template.html', 'utf-8')
-  })
-
-  const context = {
-    title: 'hello',
-    meta: `
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta name="description" content="Vue SSR">
-    `
-  }
-
-  renderer.renderToString(app, context, (err, html) => {
+  renderer.renderToString(app, (err, html) => {
     if (err) {
       res.status(500).end('Internal Server Error')
       console.log(err)
       return
     }
-    console.log(html)
+    res.end(html)
   })
 })
 
